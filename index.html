@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для тебя ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Caveat', cursive;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            text-align: center;
+            user-select: none;
+            position: relative;
+            background: linear-gradient(135deg, #ff9a9e, #fecfef, #fdf0d5);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Фоновые мерцающие звёзды - уменьшено количество */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.25;
+            animation: twinkle var(--duration) ease-in-out infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.05; transform: scale(0.8); }
+            100% { opacity: 0.4; transform: scale(1.2); }
+        }
+
+        /* Основные экраны */
+        .screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: opacity 0.8s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        #screen1 {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .card {
+            background: rgba(255, 250, 240, 0.88);
+            backdrop-filter: blur(6px); /* уменьшено размытие для производительности */
+            border-radius: 35px;
+            padding: 30px 20px;
+            box-shadow: 0 20px 60px rgba(214, 51, 132, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 90%;
+            max-width: 420px;
+            z-index: 20;
+            transition: transform 0.3s ease;
+            animation: cardPulse 8s ease-in-out infinite; /* реже пульсация */
+        }
+
+        @keyframes cardPulse {
+            0%, 100% { box-shadow: 0 20px 60px rgba(214, 51, 132, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5); }
+            50% { box-shadow: 0 25px 70px rgba(214, 51, 132, 0.5), 0 0 0 2px rgba(255, 200, 200, 0.7); }
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            color: #d63384;
+            margin-bottom: 1.5rem;
+            padding: 0 10px;
+            text-shadow: 0 0 20px rgba(214, 51, 132, 0.3);
+            z-index: 20;
+            animation: titleGlow 4s ease-in-out infinite; /* реже */
+            min-height: 5rem;
+        }
+
+        .typewriter-cursor::after {
+            content: '|';
+            display: inline-block;
+            animation: blink 0.8s step-end infinite;
+            color: #d63384;
+            font-weight: 700;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 0 20px rgba(214, 51, 132, 0.3); }
+            50% { text-shadow: 0 0 35px rgba(214, 51, 132, 0.5), 0 0 60px rgba(214, 51, 132, 0.2); }
+        }
+
+        h2 {
+            font-size: 3rem;
+            color: #c2185b;
+            margin: 10px 0;
+            z-index: 20;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            z-index: 20;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+        }
+
+        button {
+            font-family: 'Caveat', cursive;
+            font-size: 2.6rem;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            background-color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+        }
+
+        button:active::after {
+            opacity: 1;
+        }
+
+        #btnYes {
+            color: #d63384;
+            flex: 1;
+            min-width: 100px;
+            background: linear-gradient(135deg, #fff, #ffe0ec);
+            border: 2px solid #d63384;
+        }
+
+        #btnYes:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(214, 51, 132, 0.5);
+        }
+
+        #btnNo {
+            color: #6c757d;
+            flex: 1;
+            min-width: 100px;
+            background: #f8f9fa;
+            border: 2px solid #adb5bd;
+            transition: left 0.3s ease, top 0.3s ease, transform 0.2s ease;
+            position: relative;
+        }
+
+        #btnNo:hover {
+            transform: scale(1.03);
+        }
+
+        .btn-next {
+            color: #d63384;
+            margin-top: 25px;
+            animation: pulse 2.5s infinite;
+            background: linear-gradient(135deg, #fff, #ffe0ec);
+            border: 2px solid #d63384;
+            padding: 12px 50px;
+            font-size: 3rem;
+        }
+
+        .btn-next:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(214, 51, 132, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.04); }
+            100% { transform: scale(1); }
+        }
+
+        /* Летающие элементы — реже и меньше */
+        .floating-item {
+            position: absolute;
+            bottom: -15vh;
+            font-size: 2rem;
+            animation: floatUp linear forwards;
+            opacity: 0.4;
+            z-index: 1;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.4; }
+            100% { transform: translateY(-110vh) scale(1.4) rotate(360deg); opacity: 0; }
+        }
+
+        .floating-item.small { font-size: 1.4rem; }
+        .floating-item.large { font-size: 3rem; }
+        .floating-item.slow { animation-duration: 10s; }
+        .floating-item.fast { animation-duration: 5s; }
+
+        .cat-img {
+            width: 220px;
+            max-width: 80%;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(214, 51, 132, 0.4);
+            margin-bottom: 15px;
+            z-index: 20;
+            transition: transform 0.4s ease;
+            animation: catWiggle 4.5s ease-in-out infinite;
+            cursor: pointer;
+        }
+
+        @keyframes catWiggle {
+            0%, 100% { transform: rotate(-2deg) scale(1); }
+            50% { transform: rotate(2deg) scale(1.01); }
+        }
+
+        .cat-img-standalone {
+            width: 260px;
+            max-width: 75%;
+            border-radius: 20px;
+            box-shadow: 0 6px 25px rgba(214, 51, 132, 0.4);
+            margin: 15px 0;
+            z-index: 20;
+            animation: catWiggle 5s ease-in-out infinite;
+        }
+
+        .sub-text {
+            font-size: 2rem;
+            color: #a93226;
+            margin-top: 5px;
+            z-index: 20;
+            text-shadow: 0 0 12px rgba(169, 50, 38, 0.15);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(15px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .secret-text {
+            font-size: 2.8rem;
+            color: #d63384;
+            margin: 15px 0;
+            z-index: 20;
+            padding: 10px 25px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 0 25px rgba(214, 51, 132, 0.15);
+            animation: secretGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes secretGlow {
+            0%, 100% { box-shadow: 0 0 25px rgba(214, 51, 132, 0.15); }
+            50% { box-shadow: 0 0 45px rgba(214, 51, 132, 0.3); }
+        }
+
+        .timer {
+            font-size: 2.4rem;
+            color: #6c3483;
+            background: rgba(255,255,255,0.3);
+            padding: 10px 25px;
+            border-radius: 50px;
+            backdrop-filter: blur(4px);
+            margin: 12px 0;
+            box-shadow: 0 0 15px rgba(108, 52, 131, 0.15);
+            z-index: 20;
+        }
+
+        .timer span {
+            font-weight: 700;
+            color: #c2185b;
+        }
+
+        .heart-animated {
+            font-size: 4.5rem;
+            display: inline-block;
+            animation: heartBeat 1.4s ease-in-out infinite;
+            text-shadow: 0 0 25px rgba(214, 51, 132, 0.5);
+            z-index: 20;
+        }
+
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.25); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.15); }
+            70% { transform: scale(1); }
+        }
+
+        .orbital {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            pointer-events: none;
+            z-index: 0;
+            animation: orbitSpin 25s linear infinite;
+        }
+
+        @keyframes orbitSpin {
+            0% { transform: rotate(0deg) translateX(70px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
+        }
+
+        @media (max-width: 500px) {
+            h1 { font-size: 2.4rem; }
+            .btn-next { font-size: 2.2rem; padding: 10px 30px; }
+            .secret-text { font-size: 2rem; }
+            .card { padding: 20px 15px; }
+            .timer { font-size: 1.8rem; padding: 8px 18px; }
+            .heart-animated { font-size: 3.5rem; }
+            button { font-size: 2.2rem; padding: 8px 20px; }
+            .cat-img { width: 180px; }
+            .cat-img-standalone { width: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Звёздный фон -->
+    <div id="stars-container" style="position:absolute;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;"></div>
+
+    <!-- Основные экраны -->
+    <div id="screen1" class="screen">
+        <div class="card">
+            <img src="—Pngtree—cute cartoon orange cat holding_23791310.png" alt="Милый котик" class="cat-img" id="catClickable">
+            <h1 id="typewriter-title"></h1>
+            <div class="buttons">
+                <button id="btnYes" onclick="goToScreen2()">Да</button>
+                <button id="btnNo" onmouseover="moveNo(this)" onmouseout="resetNo(this)" ontouchstart="moveNo(this)" ontouchend="resetNo(this)" onclick="event.preventDefault()">Нет</button>
+            </div>
+        </div>
+        <div class="orbital" style="width:100px;height:100px;top:15%;left:10%;animation-duration:22s;"></div>
+        <div class="orbital" style="width:150px;height:150px;bottom:10%;right:5%;animation-duration:28s;animation-direction:reverse;"></div>
+    </div>
+
+    <div id="screen2" class="screen">
+        <h1>УРАААААА, Я ЗНАЛ ЧТО ТЫ НЕ ОТКАЖЕШЬ 🎉</h1>
+        <img src="—Pngtree—adorable pink cat with hearts_23700731.png" alt="Милый котик с сердечками" class="cat-img-standalone">
+        <button class="btn-next" onclick="goToScreen3()">Далее...</button>
+    </div>
+
+    <div id="screen3" class="screen">
+        <h1>Что мы будем делать этим днем?</h1>
+        <div class="secret-text">Это будет наш маленький секрет 😉</div>
+        <button class="btn-next" onclick="goToScreen4()">Далее...</button>
+    </div>
+
+    <div id="screen4" class="screen">
+        <h1>Фиг тебе, это секрет</h1>
+        <h2>Люблю тебя <span class="heart-animated">❤️</span></h2>
+        <div style="font-size: 3.5rem; margin-top: 10px;">😍😘💖</div>
+        <div class="sub-text" style="font-size: 2.6rem; margin-top: 12px;">Жду не дождусь 26 июля!</div>
+        <div class="timer" id="countdown-timer">
+            Осталось: <span id="days">0</span> дн. <span id="hours">0</span> ч. <span id="minutes">0</span> мин.
+        </div>
+    </div>
+
+    <script>
+        // ===== 1. Звёздный фон - уменьшено количество =====
+        function createStars() {
+            const container = document.getElementById('stars-container');
+            for (let i = 0; i < 35; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                const size = Math.random() * 3 + 1.5;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
+                star.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(star);
+            }
+        }
+        createStars();
+
+        // ===== 2. Печатающийся заголовок =====
+        (function typeWriter() {
+            const titleElement = document.getElementById('typewriter-title');
+            const fullText = 'Ты пойдешь со мной на свидание 26 июля?';
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                if (!isDeleting) {
+                    titleElement.textContent = fullText.substring(0, charIndex + 1);
+                    charIndex++;
+                    if (charIndex === fullText.length) {
+                        titleElement.classList.add('typewriter-cursor');
+                        setTimeout(() => {
+                            isDeleting = true;
+                            setTimeout(type, 1000);
+                        }, 2000);
+                        return;
+                    }
+                    setTimeout(type, 70 + Math.random() * 40);
+                } else {
+                    titleElement.textContent = fullText.substring(0, charIndex - 1);
+                    charIndex--;
+                    if (charIndex === 0) {
+                        isDeleting = false;
+                        titleElement.classList.remove('typewriter-cursor');
+                        setTimeout(type, 1000);
+                        return;
+                    }
+                    setTimeout(type, 40 + Math.random() * 30);
+                }
+            }
+            setTimeout(type, 500);
+        })();
+
+        // ===== 3. Летающие элементы - реже, меньше =====
+        let floatingSymbols = ['❤️', '💕', '💗', '💖', '✨', '🌸', '🎈', '🌟'];
+        let floatingInterval;
+
+        function createFloatingItem() {
+            const item = document.createElement('div');
+            item.innerHTML = floatingSymbols[Math.floor(Math.random() * floatingSymbols.length)];
+            item.classList.add('floating-item');
+            const sizeClass = Math.random() > 0.8 ? 'large' : (Math.random() > 0.5 ? 'small' : '');
+            if (sizeClass) item.classList.add(sizeClass);
+            const speedClass = Math.random() > 0.8 ? 'slow' : (Math.random() > 0.6 ? 'fast' : '');
+            if (speedClass) item.classList.add(speedClass);
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            item.style.fontSize = (Math.random() * 1.6 + 1.4) + 'rem';
+            document.body.appendChild(item);
+            setTimeout(() => { item.remove(); }, 8000);
+        }
+        // Увеличил интервал с 200 до 500 мс
+        floatingInterval = setInterval(createFloatingItem, 500);
+
+        // ===== 4. Логика кнопки "Нет" =====
+        let noBtn = document.getElementById('btnNo');
+        let noBtnOriginalPos = { left: 0, top: 0 };
+        let noBtnMoved = false;
+
+        function saveNoBtnPosition() {
+            const rect = noBtn.getBoundingClientRect();
+            const parentRect = noBtn.parentElement.getBoundingClientRect();
+            noBtnOriginalPos.left = rect.left - parentRect.left;
+            noBtnOriginalPos.top = rect.top - parentRect.top;
+        }
+        window.addEventListener('load', () => {
+            saveNoBtnPosition();
+            setTimeout(saveNoBtnPosition, 100);
+        });
+
+        function moveNo(btn) {
+            btn.innerText = '😘';
+            if (noBtnMoved) return;
+            const container = btn.parentElement;
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = btn.getBoundingClientRect();
+            const maxX = containerRect.width - btnRect.width - 10;
+            const maxY = containerRect.height - btnRect.height - 10;
+            if (maxX <= 0 || maxY <= 0) return;
+            const newLeft = Math.random() * maxX;
+            const newTop = Math.random() * maxY;
+            btn.style.position = 'relative';
+            btn.style.left = newLeft + 'px';
+            btn.style.top = newTop + 'px';
+            noBtnMoved = true;
+        }
+
+        function resetNo(btn) {
+            btn.innerText = 'Нет';
+            if (noBtnMoved) {
+                btn.style.left = noBtnOriginalPos.left + 'px';
+                btn.style.top = noBtnOriginalPos.top + 'px';
+                noBtnMoved = false;
+            }
+        }
+
+        // ===== 5. Дождь из сердечек - уменьшено количество частиц =====
+        function createHeartRain(x, y) {
+            const count = 18; // было 30
+            for (let i = 0; i < count; i++) {
+                const heart = document.createElement('div');
+                heart.textContent = '❤️';
+                heart.style.position = 'fixed';
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.fontSize = (Math.random() * 1.8 + 1.2) + 'rem';
+                heart.style.pointerEvents = 'none';
+                heart.style.zIndex = '1000';
+                heart.style.opacity = '1';
+                heart.style.transition = 'all ' + (2 + Math.random() * 1.5) + 's cubic-bezier(0, 0.8, 0.5, 1)';
+                document.body.appendChild(heart);
+
+                const angle = Math.random() * 2 * Math.PI;
+                const distance = 120 + Math.random() * 200;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance - 150;
+
+                requestAnimationFrame(() => {
+                    heart.style.transform = `translate(${dx}px, ${dy}px) scale(0.3)`;
+                    heart.style.opacity = '0';
+                });
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3500);
+            }
+        }
+
+        document.getElementById('catClickable').addEventListener('click', (e) => {
+            const rect = e.target.getBoundingClientRect();
+            const x = rect.left + rect.width / 2;
+            const y = rect.top + rect.height / 2;
+            createHeartRain(x, y);
+        });
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('button') || e.target.closest('.card')) {
+                return;
+            }
+            if (document.getElementById('screen1').style.opacity === '1') {
+                createHeartRain(e.clientX, e.clientY);
+            }
+        });
+
+        // ===== 6. Переходы =====
+        function goToScreen2() {
+            let btnYes = document.getElementById('btnYes');
+            btnYes.style.backgroundColor = '#d63384';
+            btnYes.style.color = '#fff';
+            btnYes.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                switchScreen('screen1', 'screen2');
+                startFireworks();
+                floatingSymbols = ['❤️', '🎉', '✨', '💖', '🎊', '🌟', '🌸'];
+            }, 300);
+        }
+
+        function goToScreen3() {
+            floatingSymbols = ['❓', '🤔', '❔', '❕', '💭', '✨', '❣️'];
+            switchScreen('screen2', 'screen3');
+            const secret = document.querySelector('#screen3 .secret-text');
+            if (secret) {
+                secret.style.opacity = '0';
+                setTimeout(() => {
+                    secret.style.opacity = '1';
+                    secret.classList.add('fade-in');
+                }, 300);
+            }
+        }
+
+        function goToScreen4() {
+            floatingSymbols = ['😍', '😘', '😜', '💕', '💗', '🥰', '🌹'];
+            switchScreen('screen3', 'screen4');
+            confetti({
+                particleCount: 80, // уменьшил с 150
+                spread: 70,
+                origin: { y: 0.5 }
+            });
+            startCountdown();
+        }
+
+        function switchScreen(hideId, showId) {
+            document.getElementById(hideId).style.opacity = '0';
+            document.getElementById(hideId).style.pointerEvents = 'none';
+            let showScreen = document.getElementById(showId);
+            showScreen.style.opacity = '1';
+            showScreen.style.pointerEvents = 'all';
+        }
+
+        // ===== 7. Фейерверки - реже и меньше частиц =====
+        function startFireworks() {
+            var defaults = { startVelocity: 25, spread: 300, ticks: 50, zIndex: 0 };
+            function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+            setInterval(function() {
+                var particleCount = 30; // было 50
+                confetti(Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.15, 0.35), y: Math.random() - 0.15 }
+                }));
+                confetti(Object.assign({}, defaults, {
+                    particleCount,
+                    origin: { x: randomInRange(0.65, 0.85), y: Math.random() - 0.15 }
+                }));
+            }, 1500); // было 700 мс
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                confetti({ particleCount: 60, spread: 60, origin: { y: 0.5 } });
+            }, 500);
+        });
+
+        // ===== 8. Таймер =====
+        function startCountdown() {
+            const targetDate = new Date('2026-07-26T00:00:00').getTime();
+            const daysSpan = document.getElementById('days');
+            const hoursSpan = document.getElementById('hours');
+            const minutesSpan = document.getElementById('minutes');
+
+            function updateTimer() {
+                const now = new Date().getTime();
+                const diff = targetDate - now;
+                if (diff <= 0) {
+                    daysSpan.textContent = '0';
+                    hoursSpan.textContent = '0';
+                    minutesSpan.textContent = '0';
+                    return;
+                }
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                daysSpan.textContent = days;
+                hoursSpan.textContent = hours;
+                minutesSpan.textContent = minutes;
+            }
+            updateTimer();
+            setInterval(updateTimer, 60000);
+        }
+
+        window.addEventListener('resize', () => {
+            saveNoBtnPosition();
+            if (noBtnMoved) {
+                resetNo(noBtn);
+            }
+        });
+    </script>
+</body>
+</html>
