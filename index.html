@@ -28,9 +28,7 @@
             text-align: center;
             user-select: none;
             position: relative;
-            background: linear-gradient(135deg, #ff9a9e, #fecfef, #fdf0d5);
-            background-size: 100% 100%;
-            /* Анимация фона ОТКЛЮЧЕНА — это была главная причина белого экрана */
+            background: #fecfef; /* статичный розовый фон */
             transform: translate3d(0, 0, 0);
             -webkit-transform: translate3d(0, 0, 0);
             backface-visibility: hidden;
@@ -63,7 +61,6 @@
             position: absolute;
             top: 0;
             left: 0;
-            /* Убрали transition — мгновенное переключение без анимации */
             opacity: 0;
             pointer-events: none;
             z-index: 10;
@@ -435,7 +432,7 @@
         }
         createStars();
 
-        // ===== Печатающийся заголовок (ускорен) =====
+        // ===== Печатающийся заголовок =====
         (function typeWriter() {
             const titleElement = document.getElementById('typewriter-title');
             const fullText = 'Ты пойдешь со мной на свидание 26 июля?';
@@ -470,7 +467,7 @@
             setTimeout(type, 500);
         })();
 
-        // ===== Летающие элементы – интервал 2500 мс, всего 3 символа =====
+        // ===== Летающие элементы – интервал 2500 мс =====
         let floatingSymbols = ['❤️', '✨', '🌸'];
         let floatingInterval;
 
@@ -580,13 +577,12 @@
             }
         });
 
-        // ===== Переходы – мгновенные, без анимации =====
+        // ===== Переходы – мгновенные =====
         function goToScreen2() {
             let btnYes = document.getElementById('btnYes');
             btnYes.style.backgroundColor = '#d63384';
             btnYes.style.color = '#fff';
             btnYes.style.transform = 'scale(1.04)';
-            // Убираем задержку и transition — мгновенное переключение
             switchScreen('screen1', 'screen2');
             startFireworks();
             floatingSymbols = ['❤️', '🎉', '✨', '💖'];
@@ -617,7 +613,6 @@
         }
 
         function switchScreen(hideId, showId) {
-            // Мгновенное переключение без transition
             document.getElementById(hideId).style.opacity = '0';
             document.getElementById(hideId).style.pointerEvents = 'none';
             let showScreen = document.getElementById(showId);
@@ -625,7 +620,7 @@
             showScreen.style.pointerEvents = 'all';
         }
 
-        // ===== Фейерверки – очень лёгкие, редкие =====
+        // ===== Фейерверки – очень лёгкие =====
         function startFireworks() {
             var defaults = { startVelocity: 12, spread: 150, ticks: 20, zIndex: 0 };
             function randomInRange(min, max) { return Math.random() * (max - min) + min; }
