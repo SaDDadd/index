@@ -28,30 +28,14 @@
             text-align: center;
             user-select: none;
             position: relative;
-            background: #fecfef;
-            transform: translate3d(0, 0, 0);
-            -webkit-transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            contain: strict;
-        }
-
-        /* Фон с анимацией через псевдоэлемент — отдельный слой с жёстким ускорением */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
             background: linear-gradient(135deg, #ff9a9e, #fecfef, #fdf0d5);
             background-size: 300% 300%;
+            background-attachment: fixed;
             animation: gradientShift 20s ease-in-out infinite;
-            will-change: background-position;
-            z-index: -1;
-            backface-visibility: hidden;
             transform: translate3d(0, 0, 0);
             -webkit-transform: translate3d(0, 0, 0);
-            contain: paint;
+            backface-visibility: hidden;
+            will-change: background-position;
         }
 
         @keyframes gradientShift {
