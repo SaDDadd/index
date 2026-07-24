@@ -26,7 +26,7 @@
             position: relative;
             background: linear-gradient(135deg, #ff9a9e, #fecfef, #fdf0d5);
             background-size: 400% 400%;
-            animation: gradientShift 12s ease infinite;
+            animation: gradientShift 14s ease infinite; /* медленнее, меньше перерисовок */
         }
 
         @keyframes gradientShift {
@@ -35,20 +35,20 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Звёзды – ещё меньше */
+        /* Звёзды – минимальное количество, медленная анимация */
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.2;
+            opacity: 0.15;
             animation: twinkle var(--duration) ease-in-out infinite alternate;
             pointer-events: none;
             z-index: 0;
         }
 
         @keyframes twinkle {
-            0% { opacity: 0.05; transform: scale(0.8); }
-            100% { opacity: 0.35; transform: scale(1.1); }
+            0% { opacity: 0.05; transform: scale(0.9); }
+            100% { opacity: 0.25; transform: scale(1.1); }
         }
 
         .screen {
@@ -73,38 +73,38 @@
         }
 
         .card {
-            background: rgba(255, 250, 240, 0.92); /* убрали blur для производительности */
+            background: rgba(255, 250, 240, 0.92);
             border-radius: 35px;
-            padding: 30px 20px;
-            box-shadow: 0 20px 60px rgba(214, 51, 132, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5);
+            padding: 25px 15px;
+            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.25);
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 90%;
-            max-width: 420px;
+            max-width: 400px;
             z-index: 20;
-            transition: transform 0.3s ease;
-            animation: cardPulse 10s ease-in-out infinite; /* реже */
+            transition: transform 0.2s ease;
+            animation: cardPulse 12s ease-in-out infinite; /* очень медленно */
         }
 
         @keyframes cardPulse {
-            0%, 100% { box-shadow: 0 20px 60px rgba(214, 51, 132, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5); }
-            50% { box-shadow: 0 25px 70px rgba(214, 51, 132, 0.4), 0 0 0 2px rgba(255, 200, 200, 0.6); }
+            0%, 100% { box-shadow: 0 15px 40px rgba(214, 51, 132, 0.25); }
+            50% { box-shadow: 0 20px 50px rgba(214, 51, 132, 0.35); }
         }
 
         .card:hover {
-            transform: scale(1.02);
+            transform: scale(1.01);
         }
 
         h1 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             color: #d63384;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             padding: 0 10px;
-            text-shadow: 0 0 20px rgba(214, 51, 132, 0.3);
+            text-shadow: 0 0 15px rgba(214, 51, 132, 0.25);
             z-index: 20;
-            animation: titleGlow 5s ease-in-out infinite;
-            min-height: 5rem;
+            animation: titleGlow 6s ease-in-out infinite;
+            min-height: 4.5rem;
         }
 
         .typewriter-cursor::after {
@@ -121,20 +121,20 @@
         }
 
         @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 20px rgba(214, 51, 132, 0.3); }
-            50% { text-shadow: 0 0 30px rgba(214, 51, 132, 0.4), 0 0 50px rgba(214, 51, 132, 0.15); }
+            0%, 100% { text-shadow: 0 0 15px rgba(214, 51, 132, 0.25); }
+            50% { text-shadow: 0 0 25px rgba(214, 51, 132, 0.35); }
         }
 
         h2 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: #c2185b;
-            margin: 10px 0;
+            margin: 8px 0;
             z-index: 20;
         }
 
         .buttons {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             z-index: 20;
             flex-wrap: wrap;
             justify-content: center;
@@ -144,13 +144,13 @@
 
         button {
             font-family: 'Caveat', cursive;
-            font-size: 2.6rem;
-            padding: 10px 30px;
+            font-size: 2.4rem;
+            padding: 8px 25px;
             border: none;
             border-radius: 60px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+            transition: all 0.15s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             background-color: #fff;
             position: relative;
             overflow: hidden;
@@ -165,7 +165,7 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: opacity 0.2s;
             pointer-events: none;
         }
 
@@ -176,142 +176,142 @@
         #btnYes {
             color: #d63384;
             flex: 1;
-            min-width: 100px;
+            min-width: 90px;
             background: linear-gradient(135deg, #fff, #ffe0ec);
             border: 2px solid #d63384;
         }
 
         #btnYes:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(214, 51, 132, 0.4);
+            transform: scale(1.04);
+            box-shadow: 0 0 15px rgba(214, 51, 132, 0.3);
         }
 
         #btnNo {
             color: #6c757d;
             flex: 1;
-            min-width: 100px;
+            min-width: 90px;
             background: #f8f9fa;
             border: 2px solid #adb5bd;
-            transition: left 0.3s ease, top 0.3s ease, transform 0.2s ease;
+            transition: left 0.3s ease, top 0.3s ease, transform 0.15s ease;
             position: relative;
         }
 
         #btnNo:hover {
-            transform: scale(1.03);
+            transform: scale(1.02);
         }
 
         .btn-next {
             color: #d63384;
-            margin-top: 25px;
-            animation: pulse 3s infinite;
+            margin-top: 20px;
+            animation: pulse 3.5s infinite;
             background: linear-gradient(135deg, #fff, #ffe0ec);
             border: 2px solid #d63384;
-            padding: 12px 50px;
-            font-size: 3rem;
+            padding: 10px 40px;
+            font-size: 2.8rem;
         }
 
         .btn-next:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(214, 51, 132, 0.35);
+            transform: scale(1.04);
+            box-shadow: 0 0 20px rgba(214, 51, 132, 0.3);
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
 
-        /* Летающие элементы – реже, меньше */
+        /* Летающие элементы – очень редко, минимальные размеры */
         .floating-item {
             position: absolute;
             bottom: -15vh;
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             animation: floatUp linear forwards;
-            opacity: 0.35;
+            opacity: 0.3;
             z-index: 1;
             pointer-events: none;
-            will-change: transform, opacity;
+            will-change: transform;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.35; }
-            100% { transform: translateY(-110vh) scale(1.3) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.3; }
+            100% { transform: translateY(-110vh) scale(1.2) rotate(360deg); opacity: 0; }
         }
 
-        .floating-item.small { font-size: 1.2rem; }
-        .floating-item.large { font-size: 2.8rem; }
-        .floating-item.slow { animation-duration: 12s; }
-        .floating-item.fast { animation-duration: 6s; }
+        .floating-item.small { font-size: 1rem; }
+        .floating-item.large { font-size: 2.2rem; }
+        .floating-item.slow { animation-duration: 14s; }
+        .floating-item.fast { animation-duration: 7s; }
 
         .cat-img {
-            width: 220px;
-            max-width: 80%;
+            width: 200px;
+            max-width: 75%;
             border-radius: 20px;
-            box-shadow: 0 6px 25px rgba(214, 51, 132, 0.4);
-            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(214, 51, 132, 0.3);
+            margin-bottom: 12px;
             z-index: 20;
-            transition: transform 0.4s ease;
-            animation: catWiggle 5s ease-in-out infinite; /* реже */
+            transition: transform 0.3s ease;
+            animation: catWiggle 6s ease-in-out infinite;
             cursor: pointer;
         }
 
         @keyframes catWiggle {
-            0%, 100% { transform: rotate(-2deg) scale(1); }
-            50% { transform: rotate(2deg) scale(1.01); }
+            0%, 100% { transform: rotate(-1.5deg) scale(1); }
+            50% { transform: rotate(1.5deg) scale(1.01); }
         }
 
         .cat-img-standalone {
-            width: 260px;
-            max-width: 75%;
+            width: 240px;
+            max-width: 70%;
             border-radius: 20px;
-            box-shadow: 0 6px 25px rgba(214, 51, 132, 0.4);
-            margin: 15px 0;
+            box-shadow: 0 4px 20px rgba(214, 51, 132, 0.3);
+            margin: 12px 0;
             z-index: 20;
-            animation: catWiggle 6s ease-in-out infinite;
+            animation: catWiggle 7s ease-in-out infinite;
         }
 
         .sub-text {
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: #a93226;
             margin-top: 5px;
             z-index: 20;
-            text-shadow: 0 0 12px rgba(169, 50, 38, 0.15);
+            text-shadow: 0 0 10px rgba(169, 50, 38, 0.1);
         }
 
         .fade-in {
-            animation: fadeIn 0.8s ease forwards;
+            animation: fadeIn 0.7s ease forwards;
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(15px); }
+            0% { opacity: 0; transform: translateY(12px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .secret-text {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: #d63384;
-            margin: 15px 0;
+            margin: 12px 0;
             z-index: 20;
-            padding: 10px 25px;
+            padding: 8px 20px;
             background: rgba(255,255,255,0.4);
             border-radius: 40px;
-            box-shadow: 0 0 25px rgba(214, 51, 132, 0.15);
-            animation: secretGlow 5s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(214, 51, 132, 0.1);
+            animation: secretGlow 6s ease-in-out infinite;
         }
 
         @keyframes secretGlow {
-            0%, 100% { box-shadow: 0 0 25px rgba(214, 51, 132, 0.15); }
-            50% { box-shadow: 0 0 40px rgba(214, 51, 132, 0.25); }
+            0%, 100% { box-shadow: 0 0 20px rgba(214, 51, 132, 0.1); }
+            50% { box-shadow: 0 0 30px rgba(214, 51, 132, 0.2); }
         }
 
         .timer {
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             color: #6c3483;
             background: rgba(255,255,255,0.4);
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 50px;
-            margin: 12px 0;
-            box-shadow: 0 0 15px rgba(108, 52, 131, 0.15);
+            margin: 10px 0;
+            box-shadow: 0 0 12px rgba(108, 52, 131, 0.1);
             z-index: 20;
         }
 
@@ -321,33 +321,31 @@
         }
 
         .heart-animated {
-            font-size: 4.5rem;
+            font-size: 4rem;
             display: inline-block;
-            animation: heartBeat 1.6s ease-in-out infinite;
-            text-shadow: 0 0 25px rgba(214, 51, 132, 0.5);
+            animation: heartBeat 1.8s ease-in-out infinite;
+            text-shadow: 0 0 20px rgba(214, 51, 132, 0.4);
             z-index: 20;
         }
 
         @keyframes heartBeat {
             0% { transform: scale(1); }
-            14% { transform: scale(1.25); }
+            14% { transform: scale(1.2); }
             28% { transform: scale(1); }
-            42% { transform: scale(1.15); }
+            42% { transform: scale(1.1); }
             70% { transform: scale(1); }
         }
 
-        /* Убрали орбитальные элементы совсем для лёгкости */
-
         @media (max-width: 500px) {
-            h1 { font-size: 2.4rem; }
-            .btn-next { font-size: 2.2rem; padding: 10px 30px; }
-            .secret-text { font-size: 2rem; }
-            .card { padding: 20px 15px; }
-            .timer { font-size: 1.8rem; padding: 8px 18px; }
-            .heart-animated { font-size: 3.5rem; }
-            button { font-size: 2.2rem; padding: 8px 20px; }
-            .cat-img { width: 180px; }
-            .cat-img-standalone { width: 220px; }
+            h1 { font-size: 2.2rem; }
+            .btn-next { font-size: 2rem; padding: 8px 25px; }
+            .secret-text { font-size: 1.8rem; }
+            .card { padding: 18px 12px; }
+            .timer { font-size: 1.6rem; padding: 6px 15px; }
+            .heart-animated { font-size: 3rem; }
+            button { font-size: 2rem; padding: 6px 18px; }
+            .cat-img { width: 160px; }
+            .cat-img-standalone { width: 190px; }
         }
     </style>
 </head>
@@ -357,7 +355,6 @@
 
     <div id="screen1" class="screen">
         <div class="card">
-            <!-- Длинные названия картинок сохранены -->
             <img src="—Pngtree—cute cartoon orange cat holding_23791310.png" alt="Милый котик" class="cat-img" id="catClickable">
             <h1 id="typewriter-title"></h1>
             <div class="buttons">
@@ -365,7 +362,6 @@
                 <button id="btnNo" onmouseover="moveNo(this)" onmouseout="resetNo(this)" ontouchstart="moveNo(this)" ontouchend="resetNo(this)" onclick="event.preventDefault()">Нет</button>
             </div>
         </div>
-        <!-- Орбитальные элементы убраны -->
     </div>
 
     <div id="screen2" class="screen">
@@ -383,27 +379,27 @@
     <div id="screen4" class="screen">
         <h1>Фиг тебе, это секрет</h1>
         <h2>Люблю тебя <span class="heart-animated">❤️</span></h2>
-        <div style="font-size: 3.5rem; margin-top: 10px;">😍😘💖</div>
-        <div class="sub-text" style="font-size: 2.6rem; margin-top: 12px;">Жду не дождусь 26 июля!</div>
+        <div style="font-size: 3.2rem; margin-top: 8px;">😍😘💖</div>
+        <div class="sub-text" style="font-size: 2.2rem; margin-top: 10px;">Жду не дождусь 26 июля!</div>
         <div class="timer" id="countdown-timer">
             Осталось: <span id="days">0</span> дн. <span id="hours">0</span> ч. <span id="minutes">0</span> мин.
         </div>
     </div>
 
     <script>
-        // ===== Звёзды – всего 20 =====
+        // ===== Звёзды – всего 10 штук =====
         function createStars() {
             const container = document.getElementById('stars-container');
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 10; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
-                const size = Math.random() * 2.5 + 1.5;
+                const size = Math.random() * 2 + 1.5;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.setProperty('--duration', (Math.random() * 4 + 3) + 's');
-                star.style.animationDelay = (Math.random() * 6) + 's';
+                star.style.setProperty('--duration', (Math.random() * 6 + 5) + 's'); // очень медленно
+                star.style.animationDelay = (Math.random() * 8) + 's';
                 container.appendChild(star);
             }
         }
@@ -428,7 +424,7 @@
                         }, 2000);
                         return;
                     }
-                    setTimeout(type, 70 + Math.random() * 40);
+                    setTimeout(type, 80 + Math.random() * 40);
                 } else {
                     titleElement.textContent = fullText.substring(0, charIndex - 1);
                     charIndex--;
@@ -438,14 +434,14 @@
                         setTimeout(type, 1000);
                         return;
                     }
-                    setTimeout(type, 40 + Math.random() * 30);
+                    setTimeout(type, 50 + Math.random() * 30);
                 }
             }
             setTimeout(type, 500);
         })();
 
-        // ===== Летающие элементы – интервал 1000 мс =====
-        let floatingSymbols = ['❤️', '💕', '💖', '✨', '🌸', '🎈', '🌟'];
+        // ===== Летающие элементы – интервал 1500 мс, только 4 символа =====
+        let floatingSymbols = ['❤️', '✨', '🌸', '🎈'];
         let floatingInterval;
 
         function createFloatingItem() {
@@ -457,12 +453,12 @@
             const speedClass = Math.random() > 0.8 ? 'slow' : (Math.random() > 0.6 ? 'fast' : '');
             if (speedClass) item.classList.add(speedClass);
             item.style.left = Math.random() * 100 + 'vw';
-            item.style.animationDuration = (Math.random() * 5 + 6) + 's';
-            item.style.fontSize = (Math.random() * 1.6 + 1.2) + 'rem';
+            item.style.animationDuration = (Math.random() * 6 + 7) + 's';
+            item.style.fontSize = (Math.random() * 1.2 + 1) + 'rem';
             document.body.appendChild(item);
-            setTimeout(() => { item.remove(); }, 9000);
+            setTimeout(() => { item.remove(); }, 10000);
         }
-        floatingInterval = setInterval(createFloatingItem, 1000);
+        floatingInterval = setInterval(createFloatingItem, 1500);
 
         // ===== Логика кнопки "Нет" (без изменений) =====
         let noBtn = document.getElementById('btnNo');
@@ -506,26 +502,26 @@
             }
         }
 
-        // ===== Дождь из сердечек – всего 10 частиц =====
+        // ===== Дождь из сердечек – всего 5 частиц =====
         function createHeartRain(x, y) {
-            const count = 10;
+            const count = 5;
             for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
                 heart.textContent = '❤️';
                 heart.style.position = 'fixed';
                 heart.style.left = x + 'px';
                 heart.style.top = y + 'px';
-                heart.style.fontSize = (Math.random() * 1.6 + 1.2) + 'rem';
+                heart.style.fontSize = (Math.random() * 1.2 + 1) + 'rem';
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '1000';
                 heart.style.opacity = '1';
-                heart.style.transition = 'all ' + (1.5 + Math.random() * 1.5) + 's cubic-bezier(0, 0.8, 0.5, 1)';
+                heart.style.transition = 'all ' + (1.2 + Math.random() * 1.2) + 's cubic-bezier(0, 0.8, 0.5, 1)';
                 document.body.appendChild(heart);
 
                 const angle = Math.random() * 2 * Math.PI;
-                const distance = 80 + Math.random() * 150;
+                const distance = 60 + Math.random() * 120;
                 const dx = Math.cos(angle) * distance;
-                const dy = Math.sin(angle) * distance - 120;
+                const dy = Math.sin(angle) * distance - 100;
 
                 requestAnimationFrame(() => {
                     heart.style.transform = `translate(${dx}px, ${dy}px) scale(0.3)`;
@@ -534,7 +530,7 @@
 
                 setTimeout(() => {
                     heart.remove();
-                }, 3000);
+                }, 2500);
             }
         }
 
@@ -559,16 +555,16 @@
             let btnYes = document.getElementById('btnYes');
             btnYes.style.backgroundColor = '#d63384';
             btnYes.style.color = '#fff';
-            btnYes.style.transform = 'scale(1.05)';
+            btnYes.style.transform = 'scale(1.04)';
             setTimeout(() => {
                 switchScreen('screen1', 'screen2');
                 startFireworks();
-                floatingSymbols = ['❤️', '🎉', '✨', '💖', '🎊', '🌟', '🌸'];
+                floatingSymbols = ['❤️', '🎉', '✨', '💖'];
             }, 300);
         }
 
         function goToScreen3() {
-            floatingSymbols = ['❓', '🤔', '❔', '❕', '💭', '✨', '❣️'];
+            floatingSymbols = ['❓', '🤔', '❔', '💭'];
             switchScreen('screen2', 'screen3');
             const secret = document.querySelector('#screen3 .secret-text');
             if (secret) {
@@ -581,11 +577,11 @@
         }
 
         function goToScreen4() {
-            floatingSymbols = ['😍', '😘', '😜', '💕', '💗', '🥰', '🌹'];
+            floatingSymbols = ['😍', '😘', '💕', '💗'];
             switchScreen('screen3', 'screen4');
             confetti({
-                particleCount: 40, // уменьшено
-                spread: 60,
+                particleCount: 20, // ещё меньше
+                spread: 40,
                 origin: { y: 0.5 }
             });
             startCountdown();
@@ -601,10 +597,10 @@
 
         // ===== Фейерверки – очень лёгкие =====
         function startFireworks() {
-            var defaults = { startVelocity: 20, spread: 250, ticks: 40, zIndex: 0 };
+            var defaults = { startVelocity: 15, spread: 180, ticks: 30, zIndex: 0 };
             function randomInRange(min, max) { return Math.random() * (max - min) + min; }
             setInterval(function() {
-                var particleCount = 15; // сильно уменьшено
+                var particleCount = 8;
                 confetti(Object.assign({}, defaults, {
                     particleCount,
                     origin: { x: randomInRange(0.2, 0.4), y: Math.random() - 0.1 }
@@ -613,12 +609,12 @@
                     particleCount,
                     origin: { x: randomInRange(0.6, 0.8), y: Math.random() - 0.1 }
                 }));
-            }, 2500); // реже
+            }, 3000);
         }
 
         window.addEventListener('load', () => {
             setTimeout(() => {
-                confetti({ particleCount: 30, spread: 50, origin: { y: 0.5 } });
+                confetti({ particleCount: 15, spread: 40, origin: { y: 0.5 } });
             }, 500);
         });
 
