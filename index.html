@@ -29,37 +29,28 @@
             user-select: none;
             position: relative;
             background: linear-gradient(135deg, #ff9a9e, #fecfef, #fdf0d5);
-            background-size: 300% 300%;
-            background-attachment: fixed;
-            animation: gradientShift 20s ease-in-out infinite;
+            background-size: 100% 100%;
+            /* Анимация фона ОТКЛЮЧЕНА — это была главная причина белого экрана */
             transform: translate3d(0, 0, 0);
             -webkit-transform: translate3d(0, 0, 0);
             backface-visibility: hidden;
-            will-change: background-position;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
         }
 
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.15;
+            opacity: 0.1;
             animation: twinkle var(--duration) ease-in-out infinite alternate;
             pointer-events: none;
             z-index: 1;
             will-change: transform, opacity;
             backface-visibility: hidden;
-            transform: translateZ(0);
         }
 
         @keyframes twinkle {
             0% { opacity: 0.05; transform: scale(0.9); }
-            100% { opacity: 0.25; transform: scale(1.1); }
+            100% { opacity: 0.2; transform: scale(1.0); }
         }
 
         .screen {
@@ -72,7 +63,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            transition: opacity 0.8s ease;
+            /* Убрали transition — мгновенное переключение без анимации */
             opacity: 0;
             pointer-events: none;
             z-index: 10;
@@ -89,24 +80,24 @@
         .card {
             background: rgba(255, 250, 240, 0.92);
             border-radius: 35px;
-            padding: 25px 15px;
-            box-shadow: 0 15px 40px rgba(214, 51, 132, 0.25);
+            padding: 20px 12px;
+            box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
             width: 90%;
-            max-width: 400px;
+            max-width: 380px;
             z-index: 20;
             transition: transform 0.2s ease;
-            animation: cardPulse 12s ease-in-out infinite;
+            animation: cardPulse 15s ease-in-out infinite;
             will-change: box-shadow;
             backface-visibility: hidden;
             transform: translateZ(0);
         }
 
         @keyframes cardPulse {
-            0%, 100% { box-shadow: 0 15px 40px rgba(214, 51, 132, 0.25); }
-            50% { box-shadow: 0 20px 50px rgba(214, 51, 132, 0.35); }
+            0%, 100% { box-shadow: 0 10px 30px rgba(214, 51, 132, 0.2); }
+            50% { box-shadow: 0 15px 40px rgba(214, 51, 132, 0.3); }
         }
 
         .card:hover {
@@ -114,14 +105,14 @@
         }
 
         h1 {
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: #d63384;
-            margin-bottom: 1.2rem;
+            margin-bottom: 1rem;
             padding: 0 10px;
-            text-shadow: 0 0 15px rgba(214, 51, 132, 0.25);
+            text-shadow: 0 0 15px rgba(214, 51, 132, 0.2);
             z-index: 20;
-            animation: titleGlow 6s ease-in-out infinite;
-            min-height: 4.5rem;
+            animation: titleGlow 8s ease-in-out infinite;
+            min-height: 4.2rem;
             will-change: text-shadow;
             backface-visibility: hidden;
         }
@@ -140,12 +131,12 @@
         }
 
         @keyframes titleGlow {
-            0%, 100% { text-shadow: 0 0 15px rgba(214, 51, 132, 0.25); }
-            50% { text-shadow: 0 0 25px rgba(214, 51, 132, 0.35); }
+            0%, 100% { text-shadow: 0 0 15px rgba(214, 51, 132, 0.2); }
+            50% { text-shadow: 0 0 25px rgba(214, 51, 132, 0.3); }
         }
 
         h2 {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             color: #c2185b;
             margin: 8px 0;
             z-index: 20;
@@ -163,8 +154,8 @@
 
         button {
             font-family: 'Caveat', cursive;
-            font-size: 2.4rem;
-            padding: 8px 25px;
+            font-size: 2.2rem;
+            padding: 8px 20px;
             border: none;
             border-radius: 60px;
             cursor: pointer;
@@ -173,7 +164,7 @@
             background-color: #fff;
             position: relative;
             overflow: hidden;
-            will-change: transform, box-shadow;
+            will-change: transform;
             backface-visibility: hidden;
             transform: translateZ(0);
         }
@@ -198,7 +189,7 @@
         #btnYes {
             color: #d63384;
             flex: 1;
-            min-width: 90px;
+            min-width: 80px;
             background: linear-gradient(135deg, #fff, #ffe0ec);
             border: 2px solid #d63384;
         }
@@ -211,7 +202,7 @@
         #btnNo {
             color: #6c757d;
             flex: 1;
-            min-width: 90px;
+            min-width: 80px;
             background: #f8f9fa;
             border: 2px solid #adb5bd;
             transition: left 0.3s ease, top 0.3s ease, transform 0.15s ease;
@@ -225,11 +216,11 @@
         .btn-next {
             color: #d63384;
             margin-top: 20px;
-            animation: pulse 3.5s infinite;
+            animation: pulse 5s infinite;
             background: linear-gradient(135deg, #fff, #ffe0ec);
             border: 2px solid #d63384;
-            padding: 10px 40px;
-            font-size: 2.8rem;
+            padding: 10px 35px;
+            font-size: 2.6rem;
             will-change: transform;
             backface-visibility: hidden;
             transform: translateZ(0);
@@ -249,9 +240,9 @@
         .floating-item {
             position: absolute;
             bottom: -15vh;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             animation: floatUp linear forwards;
-            opacity: 0.3;
+            opacity: 0.2;
             z-index: 1;
             pointer-events: none;
             will-change: transform;
@@ -260,24 +251,24 @@
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.3; }
-            100% { transform: translateY(-110vh) scale(1.2) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.2; }
+            100% { transform: translateY(-110vh) scale(1.1) rotate(360deg); opacity: 0; }
         }
 
-        .floating-item.small { font-size: 1rem; }
-        .floating-item.large { font-size: 2.2rem; }
-        .floating-item.slow { animation-duration: 14s; }
-        .floating-item.fast { animation-duration: 7s; }
+        .floating-item.small { font-size: 0.9rem; }
+        .floating-item.large { font-size: 2rem; }
+        .floating-item.slow { animation-duration: 18s; }
+        .floating-item.fast { animation-duration: 9s; }
 
         .cat-img {
-            width: 200px;
-            max-width: 75%;
+            width: 180px;
+            max-width: 70%;
             border-radius: 20px;
             box-shadow: 0 4px 20px rgba(214, 51, 132, 0.3);
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             z-index: 20;
             transition: transform 0.3s ease;
-            animation: catWiggle 6s ease-in-out infinite;
+            animation: catWiggle 8s ease-in-out infinite;
             cursor: pointer;
             will-change: transform;
             backface-visibility: hidden;
@@ -290,13 +281,13 @@
         }
 
         .cat-img-standalone {
-            width: 240px;
-            max-width: 70%;
+            width: 220px;
+            max-width: 65%;
             border-radius: 20px;
             box-shadow: 0 4px 20px rgba(214, 51, 132, 0.3);
-            margin: 12px 0;
+            margin: 10px 0;
             z-index: 20;
-            animation: catWiggle 7s ease-in-out infinite;
+            animation: catWiggle 10s ease-in-out infinite;
             will-change: transform;
             backface-visibility: hidden;
             transform: translateZ(0);
@@ -311,24 +302,24 @@
         }
 
         .fade-in {
-            animation: fadeIn 0.7s ease forwards;
+            animation: fadeIn 0.6s ease forwards;
         }
 
         @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(12px); }
+            0% { opacity: 0; transform: translateY(10px); }
             100% { opacity: 1; transform: translateY(0); }
         }
 
         .secret-text {
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             color: #d63384;
-            margin: 12px 0;
+            margin: 10px 0;
             z-index: 20;
-            padding: 8px 20px;
+            padding: 8px 18px;
             background: rgba(255,255,255,0.4);
             border-radius: 40px;
             box-shadow: 0 0 20px rgba(214, 51, 132, 0.1);
-            animation: secretGlow 6s ease-in-out infinite;
+            animation: secretGlow 8s ease-in-out infinite;
             will-change: box-shadow;
             backface-visibility: hidden;
             transform: translateZ(0);
@@ -340,10 +331,10 @@
         }
 
         .timer {
-            font-size: 2.2rem;
+            font-size: 2rem;
             color: #6c3483;
             background: rgba(255,255,255,0.4);
-            padding: 8px 20px;
+            padding: 8px 18px;
             border-radius: 50px;
             margin: 10px 0;
             box-shadow: 0 0 12px rgba(108, 52, 131, 0.1);
@@ -357,9 +348,9 @@
         }
 
         .heart-animated {
-            font-size: 4rem;
+            font-size: 3.8rem;
             display: inline-block;
-            animation: heartBeat 1.8s ease-in-out infinite;
+            animation: heartBeat 2.2s ease-in-out infinite;
             text-shadow: 0 0 20px rgba(214, 51, 132, 0.4);
             z-index: 20;
             will-change: transform;
@@ -369,22 +360,22 @@
 
         @keyframes heartBeat {
             0% { transform: scale(1); }
-            14% { transform: scale(1.2); }
+            14% { transform: scale(1.15); }
             28% { transform: scale(1); }
-            42% { transform: scale(1.1); }
+            42% { transform: scale(1.08); }
             70% { transform: scale(1); }
         }
 
         @media (max-width: 500px) {
-            h1 { font-size: 2.2rem; }
+            h1 { font-size: 2rem; }
             .btn-next { font-size: 2rem; padding: 8px 25px; }
             .secret-text { font-size: 1.8rem; }
-            .card { padding: 18px 12px; }
-            .timer { font-size: 1.6rem; padding: 6px 15px; }
+            .card { padding: 15px 10px; }
+            .timer { font-size: 1.5rem; padding: 6px 12px; }
             .heart-animated { font-size: 3rem; }
-            button { font-size: 2rem; padding: 6px 18px; }
-            .cat-img { width: 160px; }
-            .cat-img-standalone { width: 190px; }
+            button { font-size: 2rem; padding: 6px 16px; }
+            .cat-img { width: 150px; }
+            .cat-img-standalone { width: 180px; }
         }
     </style>
 </head>
@@ -418,18 +409,18 @@
     <div id="screen4" class="screen">
         <h1>Фиг тебе, это секрет</h1>
         <h2>Люблю тебя <span class="heart-animated">❤️</span></h2>
-        <div style="font-size: 3.2rem; margin-top: 8px;">😍😘💖</div>
-        <div class="sub-text" style="font-size: 2.2rem; margin-top: 10px;">Жду не дождусь 26 июля!</div>
+        <div style="font-size: 3rem; margin-top: 8px;">😍😘💖</div>
+        <div class="sub-text" style="font-size: 2rem; margin-top: 8px;">Жду не дождусь 26 июля!</div>
         <div class="timer" id="countdown-timer">
             Осталось: <span id="days">0</span> дн. <span id="hours">0</span> ч. <span id="minutes">0</span> мин.
         </div>
     </div>
 
     <script>
-        // ===== Звёзды – всего 10 штук =====
+        // ===== Звёзды – всего 5 штук =====
         function createStars() {
             const container = document.getElementById('stars-container');
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 5; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
                 const size = Math.random() * 2 + 1.5;
@@ -437,14 +428,14 @@
                 star.style.height = size + 'px';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.setProperty('--duration', (Math.random() * 6 + 5) + 's');
-                star.style.animationDelay = (Math.random() * 8) + 's';
+                star.style.setProperty('--duration', (Math.random() * 8 + 6) + 's');
+                star.style.animationDelay = (Math.random() * 10) + 's';
                 container.appendChild(star);
             }
         }
         createStars();
 
-        // ===== Печатающийся заголовок =====
+        // ===== Печатающийся заголовок (ускорен) =====
         (function typeWriter() {
             const titleElement = document.getElementById('typewriter-title');
             const fullText = 'Ты пойдешь со мной на свидание 26 июля?';
@@ -463,7 +454,7 @@
                         }, 2000);
                         return;
                     }
-                    setTimeout(type, 80 + Math.random() * 40);
+                    setTimeout(type, 100 + Math.random() * 40);
                 } else {
                     titleElement.textContent = fullText.substring(0, charIndex - 1);
                     charIndex--;
@@ -473,14 +464,14 @@
                         setTimeout(type, 1000);
                         return;
                     }
-                    setTimeout(type, 50 + Math.random() * 30);
+                    setTimeout(type, 60 + Math.random() * 30);
                 }
             }
             setTimeout(type, 500);
         })();
 
-        // ===== Летающие элементы – интервал 1500 мс =====
-        let floatingSymbols = ['❤️', '✨', '🌸', '🎈'];
+        // ===== Летающие элементы – интервал 2500 мс, всего 3 символа =====
+        let floatingSymbols = ['❤️', '✨', '🌸'];
         let floatingInterval;
 
         function createFloatingItem() {
@@ -492,12 +483,12 @@
             const speedClass = Math.random() > 0.8 ? 'slow' : (Math.random() > 0.6 ? 'fast' : '');
             if (speedClass) item.classList.add(speedClass);
             item.style.left = Math.random() * 100 + 'vw';
-            item.style.animationDuration = (Math.random() * 6 + 7) + 's';
-            item.style.fontSize = (Math.random() * 1.2 + 1) + 'rem';
+            item.style.animationDuration = (Math.random() * 8 + 10) + 's';
+            item.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
             document.body.appendChild(item);
-            setTimeout(() => { item.remove(); }, 10000);
+            setTimeout(() => { item.remove(); }, 12000);
         }
-        floatingInterval = setInterval(createFloatingItem, 1500);
+        floatingInterval = setInterval(createFloatingItem, 2500);
 
         // ===== Логика кнопки "Нет" =====
         let noBtn = document.getElementById('btnNo');
@@ -541,26 +532,26 @@
             }
         }
 
-        // ===== Дождь из сердечек – всего 5 частиц =====
+        // ===== Дождь из сердечек – всего 3 частицы =====
         function createHeartRain(x, y) {
-            const count = 5;
+            const count = 3;
             for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
                 heart.textContent = '❤️';
                 heart.style.position = 'fixed';
                 heart.style.left = x + 'px';
                 heart.style.top = y + 'px';
-                heart.style.fontSize = (Math.random() * 1.2 + 1) + 'rem';
+                heart.style.fontSize = (Math.random() * 1 + 1) + 'rem';
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '1000';
                 heart.style.opacity = '1';
-                heart.style.transition = 'all ' + (1.2 + Math.random() * 1.2) + 's cubic-bezier(0, 0.8, 0.5, 1)';
+                heart.style.transition = 'all ' + (1 + Math.random() * 1) + 's cubic-bezier(0, 0.8, 0.5, 1)';
                 document.body.appendChild(heart);
 
                 const angle = Math.random() * 2 * Math.PI;
-                const distance = 60 + Math.random() * 120;
+                const distance = 50 + Math.random() * 80;
                 const dx = Math.cos(angle) * distance;
-                const dy = Math.sin(angle) * distance - 100;
+                const dy = Math.sin(angle) * distance - 80;
 
                 requestAnimationFrame(() => {
                     heart.style.transform = `translate(${dx}px, ${dy}px) scale(0.3)`;
@@ -569,7 +560,7 @@
 
                 setTimeout(() => {
                     heart.remove();
-                }, 2500);
+                }, 2000);
             }
         }
 
@@ -589,17 +580,16 @@
             }
         });
 
-        // ===== Переходы =====
+        // ===== Переходы – мгновенные, без анимации =====
         function goToScreen2() {
             let btnYes = document.getElementById('btnYes');
             btnYes.style.backgroundColor = '#d63384';
             btnYes.style.color = '#fff';
             btnYes.style.transform = 'scale(1.04)';
-            setTimeout(() => {
-                switchScreen('screen1', 'screen2');
-                startFireworks();
-                floatingSymbols = ['❤️', '🎉', '✨', '💖'];
-            }, 300);
+            // Убираем задержку и transition — мгновенное переключение
+            switchScreen('screen1', 'screen2');
+            startFireworks();
+            floatingSymbols = ['❤️', '🎉', '✨', '💖'];
         }
 
         function goToScreen3() {
@@ -611,7 +601,7 @@
                 setTimeout(() => {
                     secret.style.opacity = '1';
                     secret.classList.add('fade-in');
-                }, 300);
+                }, 200);
             }
         }
 
@@ -619,14 +609,15 @@
             floatingSymbols = ['😍', '😘', '💕', '💗'];
             switchScreen('screen3', 'screen4');
             confetti({
-                particleCount: 20,
-                spread: 40,
+                particleCount: 15,
+                spread: 30,
                 origin: { y: 0.5 }
             });
             startCountdown();
         }
 
         function switchScreen(hideId, showId) {
+            // Мгновенное переключение без transition
             document.getElementById(hideId).style.opacity = '0';
             document.getElementById(hideId).style.pointerEvents = 'none';
             let showScreen = document.getElementById(showId);
@@ -634,12 +625,12 @@
             showScreen.style.pointerEvents = 'all';
         }
 
-        // ===== Фейерверки – очень лёгкие =====
+        // ===== Фейерверки – очень лёгкие, редкие =====
         function startFireworks() {
-            var defaults = { startVelocity: 15, spread: 180, ticks: 30, zIndex: 0 };
+            var defaults = { startVelocity: 12, spread: 150, ticks: 20, zIndex: 0 };
             function randomInRange(min, max) { return Math.random() * (max - min) + min; }
             setInterval(function() {
-                var particleCount = 8;
+                var particleCount = 5;
                 confetti(Object.assign({}, defaults, {
                     particleCount,
                     origin: { x: randomInRange(0.2, 0.4), y: Math.random() - 0.1 }
@@ -648,12 +639,12 @@
                     particleCount,
                     origin: { x: randomInRange(0.6, 0.8), y: Math.random() - 0.1 }
                 }));
-            }, 3000);
+            }, 4000);
         }
 
         window.addEventListener('load', () => {
             setTimeout(() => {
-                confetti({ particleCount: 15, spread: 40, origin: { y: 0.5 } });
+                confetti({ particleCount: 10, spread: 30, origin: { y: 0.5 } });
             }, 500);
         });
 
