@@ -24,11 +24,28 @@
             text-align: center;
             user-select: none;
             position: relative;
+            background: #fecfef;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* Фон с анимацией через псевдоэлемент — отдельный слой */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(135deg, #ff9a9e, #fecfef, #fdf0d5);
             background-size: 300% 300%;
-            will-change: transform, background-position;
+            animation: gradientShift 20s ease-in-out infinite;
+            will-change: background-position;
+            z-index: -1;
             backface-visibility: hidden;
-            animation: gradientShift 16s ease-in-out infinite;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         @keyframes gradientShift {
@@ -37,7 +54,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Звёзды – минимальное количество, медленная анимация */
         .star {
             position: absolute;
             background: white;
@@ -45,7 +61,7 @@
             opacity: 0.15;
             animation: twinkle var(--duration) ease-in-out infinite alternate;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
             will-change: transform, opacity;
             backface-visibility: hidden;
         }
@@ -91,7 +107,7 @@
             z-index: 20;
             transition: transform 0.2s ease;
             animation: cardPulse 12s ease-in-out infinite;
-            will-change: transform, box-shadow;
+            will-change: box-shadow;
             backface-visibility: hidden;
         }
 
@@ -233,7 +249,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Летающие элементы – очень редко, минимальные размеры */
         .floating-item {
             position: absolute;
             bottom: -15vh;
@@ -372,7 +387,7 @@
 </head>
 <body>
 
-    <div id="stars-container" style="position:absolute;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;"></div>
+    <div id="stars-container" style="position:absolute;width:100%;height:100%;z-index:1;pointer-events:none;overflow:hidden;"></div>
 
     <div id="screen1" class="screen">
         <div class="card">
@@ -426,7 +441,7 @@
         }
         createStars();
 
-        // ===== Печатающийся заголовок (без изменений) =====
+        // ===== Печатающийся заголовок =====
         (function typeWriter() {
             const titleElement = document.getElementById('typewriter-title');
             const fullText = 'Ты пойдешь со мной на свидание 26 июля?';
@@ -461,7 +476,7 @@
             setTimeout(type, 500);
         })();
 
-        // ===== Летающие элементы – интервал 1500 мс, только 4 символа =====
+        // ===== Летающие элементы – интервал 1500 мс =====
         let floatingSymbols = ['❤️', '✨', '🌸', '🎈'];
         let floatingInterval;
 
@@ -481,7 +496,7 @@
         }
         floatingInterval = setInterval(createFloatingItem, 1500);
 
-        // ===== Логика кнопки "Нет" (без изменений) =====
+        // ===== Логика кнопки "Нет" =====
         let noBtn = document.getElementById('btnNo');
         let noBtnOriginalPos = { left: 0, top: 0 };
         let noBtnMoved = false;
@@ -571,7 +586,7 @@
             }
         });
 
-        // ===== Переходы (без изменений) =====
+        // ===== Переходы =====
         function goToScreen2() {
             let btnYes = document.getElementById('btnYes');
             btnYes.style.backgroundColor = '#d63384';
@@ -639,7 +654,7 @@
             }, 500);
         });
 
-        // ===== Таймер (без изменений) =====
+        // ===== Таймер =====
         function startCountdown() {
             const targetDate = new Date('2026-07-26T00:00:00').getTime();
             const daysSpan = document.getElementById('days');
