@@ -35,12 +35,12 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Фоновые мерцающие звёзды - уменьшено количество */
+        /* Звёзды – ещё меньше */
         .star {
             position: absolute;
             background: white;
             border-radius: 50%;
-            opacity: 0.25;
+            opacity: 0.2;
             animation: twinkle var(--duration) ease-in-out infinite alternate;
             pointer-events: none;
             z-index: 0;
@@ -48,10 +48,9 @@
 
         @keyframes twinkle {
             0% { opacity: 0.05; transform: scale(0.8); }
-            100% { opacity: 0.4; transform: scale(1.2); }
+            100% { opacity: 0.35; transform: scale(1.1); }
         }
 
-        /* Основные экраны */
         .screen {
             display: flex;
             flex-direction: column;
@@ -74,8 +73,7 @@
         }
 
         .card {
-            background: rgba(255, 250, 240, 0.88);
-            backdrop-filter: blur(6px); /* уменьшено размытие для производительности */
+            background: rgba(255, 250, 240, 0.92); /* убрали blur для производительности */
             border-radius: 35px;
             padding: 30px 20px;
             box-shadow: 0 20px 60px rgba(214, 51, 132, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5);
@@ -86,12 +84,12 @@
             max-width: 420px;
             z-index: 20;
             transition: transform 0.3s ease;
-            animation: cardPulse 8s ease-in-out infinite; /* реже пульсация */
+            animation: cardPulse 10s ease-in-out infinite; /* реже */
         }
 
         @keyframes cardPulse {
             0%, 100% { box-shadow: 0 20px 60px rgba(214, 51, 132, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.5); }
-            50% { box-shadow: 0 25px 70px rgba(214, 51, 132, 0.5), 0 0 0 2px rgba(255, 200, 200, 0.7); }
+            50% { box-shadow: 0 25px 70px rgba(214, 51, 132, 0.4), 0 0 0 2px rgba(255, 200, 200, 0.6); }
         }
 
         .card:hover {
@@ -105,7 +103,7 @@
             padding: 0 10px;
             text-shadow: 0 0 20px rgba(214, 51, 132, 0.3);
             z-index: 20;
-            animation: titleGlow 4s ease-in-out infinite; /* реже */
+            animation: titleGlow 5s ease-in-out infinite;
             min-height: 5rem;
         }
 
@@ -124,7 +122,7 @@
 
         @keyframes titleGlow {
             0%, 100% { text-shadow: 0 0 20px rgba(214, 51, 132, 0.3); }
-            50% { text-shadow: 0 0 35px rgba(214, 51, 132, 0.5), 0 0 60px rgba(214, 51, 132, 0.2); }
+            50% { text-shadow: 0 0 30px rgba(214, 51, 132, 0.4), 0 0 50px rgba(214, 51, 132, 0.15); }
         }
 
         h2 {
@@ -151,7 +149,7 @@
             border: none;
             border-radius: 60px;
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: all 0.2s ease;
             box-shadow: 0 6px 20px rgba(0,0,0,0.12);
             background-color: #fff;
             position: relative;
@@ -185,7 +183,7 @@
 
         #btnYes:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 25px rgba(214, 51, 132, 0.5);
+            box-shadow: 0 0 20px rgba(214, 51, 132, 0.4);
         }
 
         #btnNo {
@@ -205,7 +203,7 @@
         .btn-next {
             color: #d63384;
             margin-top: 25px;
-            animation: pulse 2.5s infinite;
+            animation: pulse 3s infinite;
             background: linear-gradient(135deg, #fff, #ffe0ec);
             border: 2px solid #d63384;
             padding: 12px 50px;
@@ -214,36 +212,36 @@
 
         .btn-next:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 30px rgba(214, 51, 132, 0.4);
+            box-shadow: 0 0 25px rgba(214, 51, 132, 0.35);
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.04); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
         }
 
-        /* Летающие элементы — реже и меньше */
+        /* Летающие элементы – реже, меньше */
         .floating-item {
             position: absolute;
             bottom: -15vh;
-            font-size: 2rem;
+            font-size: 1.8rem;
             animation: floatUp linear forwards;
-            opacity: 0.4;
+            opacity: 0.35;
             z-index: 1;
             pointer-events: none;
             will-change: transform, opacity;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.4; }
-            100% { transform: translateY(-110vh) scale(1.4) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(0) scale(0.8) rotate(0deg); opacity: 0.35; }
+            100% { transform: translateY(-110vh) scale(1.3) rotate(360deg); opacity: 0; }
         }
 
-        .floating-item.small { font-size: 1.4rem; }
-        .floating-item.large { font-size: 3rem; }
-        .floating-item.slow { animation-duration: 10s; }
-        .floating-item.fast { animation-duration: 5s; }
+        .floating-item.small { font-size: 1.2rem; }
+        .floating-item.large { font-size: 2.8rem; }
+        .floating-item.slow { animation-duration: 12s; }
+        .floating-item.fast { animation-duration: 6s; }
 
         .cat-img {
             width: 220px;
@@ -253,7 +251,7 @@
             margin-bottom: 15px;
             z-index: 20;
             transition: transform 0.4s ease;
-            animation: catWiggle 4.5s ease-in-out infinite;
+            animation: catWiggle 5s ease-in-out infinite; /* реже */
             cursor: pointer;
         }
 
@@ -269,7 +267,7 @@
             box-shadow: 0 6px 25px rgba(214, 51, 132, 0.4);
             margin: 15px 0;
             z-index: 20;
-            animation: catWiggle 5s ease-in-out infinite;
+            animation: catWiggle 6s ease-in-out infinite;
         }
 
         .sub-text {
@@ -295,25 +293,23 @@
             margin: 15px 0;
             z-index: 20;
             padding: 10px 25px;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.4);
             border-radius: 40px;
-            backdrop-filter: blur(4px);
             box-shadow: 0 0 25px rgba(214, 51, 132, 0.15);
-            animation: secretGlow 4s ease-in-out infinite;
+            animation: secretGlow 5s ease-in-out infinite;
         }
 
         @keyframes secretGlow {
             0%, 100% { box-shadow: 0 0 25px rgba(214, 51, 132, 0.15); }
-            50% { box-shadow: 0 0 45px rgba(214, 51, 132, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(214, 51, 132, 0.25); }
         }
 
         .timer {
             font-size: 2.4rem;
             color: #6c3483;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.4);
             padding: 10px 25px;
             border-radius: 50px;
-            backdrop-filter: blur(4px);
             margin: 12px 0;
             box-shadow: 0 0 15px rgba(108, 52, 131, 0.15);
             z-index: 20;
@@ -327,7 +323,7 @@
         .heart-animated {
             font-size: 4.5rem;
             display: inline-block;
-            animation: heartBeat 1.4s ease-in-out infinite;
+            animation: heartBeat 1.6s ease-in-out infinite;
             text-shadow: 0 0 25px rgba(214, 51, 132, 0.5);
             z-index: 20;
         }
@@ -340,20 +336,7 @@
             70% { transform: scale(1); }
         }
 
-        .orbital {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            pointer-events: none;
-            z-index: 0;
-            animation: orbitSpin 25s linear infinite;
-        }
-
-        @keyframes orbitSpin {
-            0% { transform: rotate(0deg) translateX(70px) rotate(0deg); }
-            100% { transform: rotate(360deg) translateX(70px) rotate(-360deg); }
-        }
+        /* Убрали орбитальные элементы совсем для лёгкости */
 
         @media (max-width: 500px) {
             h1 { font-size: 2.4rem; }
@@ -370,12 +353,11 @@
 </head>
 <body>
 
-    <!-- Звёздный фон -->
     <div id="stars-container" style="position:absolute;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden;"></div>
 
-    <!-- Основные экраны -->
     <div id="screen1" class="screen">
         <div class="card">
+            <!-- Длинные названия картинок сохранены -->
             <img src="—Pngtree—cute cartoon orange cat holding_23791310.png" alt="Милый котик" class="cat-img" id="catClickable">
             <h1 id="typewriter-title"></h1>
             <div class="buttons">
@@ -383,8 +365,7 @@
                 <button id="btnNo" onmouseover="moveNo(this)" onmouseout="resetNo(this)" ontouchstart="moveNo(this)" ontouchend="resetNo(this)" onclick="event.preventDefault()">Нет</button>
             </div>
         </div>
-        <div class="orbital" style="width:100px;height:100px;top:15%;left:10%;animation-duration:22s;"></div>
-        <div class="orbital" style="width:150px;height:150px;bottom:10%;right:5%;animation-duration:28s;animation-direction:reverse;"></div>
+        <!-- Орбитальные элементы убраны -->
     </div>
 
     <div id="screen2" class="screen">
@@ -410,25 +391,25 @@
     </div>
 
     <script>
-        // ===== 1. Звёздный фон - уменьшено количество =====
+        // ===== Звёзды – всего 20 =====
         function createStars() {
             const container = document.getElementById('stars-container');
-            for (let i = 0; i < 35; i++) {
+            for (let i = 0; i < 20; i++) {
                 const star = document.createElement('div');
                 star.classList.add('star');
-                const size = Math.random() * 3 + 1.5;
+                const size = Math.random() * 2.5 + 1.5;
                 star.style.width = size + 'px';
                 star.style.height = size + 'px';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.setProperty('--duration', (Math.random() * 3 + 2) + 's');
-                star.style.animationDelay = (Math.random() * 5) + 's';
+                star.style.setProperty('--duration', (Math.random() * 4 + 3) + 's');
+                star.style.animationDelay = (Math.random() * 6) + 's';
                 container.appendChild(star);
             }
         }
         createStars();
 
-        // ===== 2. Печатающийся заголовок =====
+        // ===== Печатающийся заголовок (без изменений) =====
         (function typeWriter() {
             const titleElement = document.getElementById('typewriter-title');
             const fullText = 'Ты пойдешь со мной на свидание 26 июля?';
@@ -463,8 +444,8 @@
             setTimeout(type, 500);
         })();
 
-        // ===== 3. Летающие элементы - реже, меньше =====
-        let floatingSymbols = ['❤️', '💕', '💗', '💖', '✨', '🌸', '🎈', '🌟'];
+        // ===== Летающие элементы – интервал 1000 мс =====
+        let floatingSymbols = ['❤️', '💕', '💖', '✨', '🌸', '🎈', '🌟'];
         let floatingInterval;
 
         function createFloatingItem() {
@@ -476,15 +457,14 @@
             const speedClass = Math.random() > 0.8 ? 'slow' : (Math.random() > 0.6 ? 'fast' : '');
             if (speedClass) item.classList.add(speedClass);
             item.style.left = Math.random() * 100 + 'vw';
-            item.style.animationDuration = (Math.random() * 4 + 5) + 's';
-            item.style.fontSize = (Math.random() * 1.6 + 1.4) + 'rem';
+            item.style.animationDuration = (Math.random() * 5 + 6) + 's';
+            item.style.fontSize = (Math.random() * 1.6 + 1.2) + 'rem';
             document.body.appendChild(item);
-            setTimeout(() => { item.remove(); }, 8000);
+            setTimeout(() => { item.remove(); }, 9000);
         }
-        // Увеличил интервал с 200 до 500 мс
-        floatingInterval = setInterval(createFloatingItem, 500);
+        floatingInterval = setInterval(createFloatingItem, 1000);
 
-        // ===== 4. Логика кнопки "Нет" =====
+        // ===== Логика кнопки "Нет" (без изменений) =====
         let noBtn = document.getElementById('btnNo');
         let noBtnOriginalPos = { left: 0, top: 0 };
         let noBtnMoved = false;
@@ -526,26 +506,26 @@
             }
         }
 
-        // ===== 5. Дождь из сердечек - уменьшено количество частиц =====
+        // ===== Дождь из сердечек – всего 10 частиц =====
         function createHeartRain(x, y) {
-            const count = 18; // было 30
+            const count = 10;
             for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
                 heart.textContent = '❤️';
                 heart.style.position = 'fixed';
                 heart.style.left = x + 'px';
                 heart.style.top = y + 'px';
-                heart.style.fontSize = (Math.random() * 1.8 + 1.2) + 'rem';
+                heart.style.fontSize = (Math.random() * 1.6 + 1.2) + 'rem';
                 heart.style.pointerEvents = 'none';
                 heart.style.zIndex = '1000';
                 heart.style.opacity = '1';
-                heart.style.transition = 'all ' + (2 + Math.random() * 1.5) + 's cubic-bezier(0, 0.8, 0.5, 1)';
+                heart.style.transition = 'all ' + (1.5 + Math.random() * 1.5) + 's cubic-bezier(0, 0.8, 0.5, 1)';
                 document.body.appendChild(heart);
 
                 const angle = Math.random() * 2 * Math.PI;
-                const distance = 120 + Math.random() * 200;
+                const distance = 80 + Math.random() * 150;
                 const dx = Math.cos(angle) * distance;
-                const dy = Math.sin(angle) * distance - 150;
+                const dy = Math.sin(angle) * distance - 120;
 
                 requestAnimationFrame(() => {
                     heart.style.transform = `translate(${dx}px, ${dy}px) scale(0.3)`;
@@ -554,7 +534,7 @@
 
                 setTimeout(() => {
                     heart.remove();
-                }, 3500);
+                }, 3000);
             }
         }
 
@@ -574,7 +554,7 @@
             }
         });
 
-        // ===== 6. Переходы =====
+        // ===== Переходы (без изменений) =====
         function goToScreen2() {
             let btnYes = document.getElementById('btnYes');
             btnYes.style.backgroundColor = '#d63384';
@@ -604,8 +584,8 @@
             floatingSymbols = ['😍', '😘', '😜', '💕', '💗', '🥰', '🌹'];
             switchScreen('screen3', 'screen4');
             confetti({
-                particleCount: 80, // уменьшил с 150
-                spread: 70,
+                particleCount: 40, // уменьшено
+                spread: 60,
                 origin: { y: 0.5 }
             });
             startCountdown();
@@ -619,30 +599,30 @@
             showScreen.style.pointerEvents = 'all';
         }
 
-        // ===== 7. Фейерверки - реже и меньше частиц =====
+        // ===== Фейерверки – очень лёгкие =====
         function startFireworks() {
-            var defaults = { startVelocity: 25, spread: 300, ticks: 50, zIndex: 0 };
+            var defaults = { startVelocity: 20, spread: 250, ticks: 40, zIndex: 0 };
             function randomInRange(min, max) { return Math.random() * (max - min) + min; }
             setInterval(function() {
-                var particleCount = 30; // было 50
+                var particleCount = 15; // сильно уменьшено
                 confetti(Object.assign({}, defaults, {
                     particleCount,
-                    origin: { x: randomInRange(0.15, 0.35), y: Math.random() - 0.15 }
+                    origin: { x: randomInRange(0.2, 0.4), y: Math.random() - 0.1 }
                 }));
                 confetti(Object.assign({}, defaults, {
                     particleCount,
-                    origin: { x: randomInRange(0.65, 0.85), y: Math.random() - 0.15 }
+                    origin: { x: randomInRange(0.6, 0.8), y: Math.random() - 0.1 }
                 }));
-            }, 1500); // было 700 мс
+            }, 2500); // реже
         }
 
         window.addEventListener('load', () => {
             setTimeout(() => {
-                confetti({ particleCount: 60, spread: 60, origin: { y: 0.5 } });
+                confetti({ particleCount: 30, spread: 50, origin: { y: 0.5 } });
             }, 500);
         });
 
-        // ===== 8. Таймер =====
+        // ===== Таймер (без изменений) =====
         function startCountdown() {
             const targetDate = new Date('2026-07-26T00:00:00').getTime();
             const daysSpan = document.getElementById('days');
